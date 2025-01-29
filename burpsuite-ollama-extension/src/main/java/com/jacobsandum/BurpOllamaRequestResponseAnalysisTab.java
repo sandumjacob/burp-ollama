@@ -1,6 +1,8 @@
 package com.jacobsandum;
 
 import burp.api.montoya.MontoyaApi;
+import burp.api.montoya.ui.editor.HttpRequestEditor;
+import burp.api.montoya.ui.editor.HttpResponseEditor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +18,27 @@ public class BurpOllamaRequestResponseAnalysisTab extends JComponent
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 
-        // Options UI
-        JPanel optionsContent = new JPanel();
-        optionsContent.setName("The One Ring Custom Tab Panel");
-        optionsContent.setBackground(Color.WHITE);
+        JButton ollamaAnalyzeButton = new JButton("Analyze");
+        ollamaAnalyzeButton.addActionListener(e -> {
 
-        JTextField garakPathTextField = new JTextField(32);
+        });
+        add(ollamaAnalyzeButton);
+
+        JTextPane ollamaOutputPane = new JTextPane();
+        ollamaOutputPane.setText("Ollama output here!");
+        add(ollamaOutputPane);
+
+
+        // Editor Controls UI
+        JPanel editorControls = new JPanel();
+
+        HttpRequestEditor ollamaRequestEditor  = extension.burpApi.userInterface().createHttpRequestEditor();
+
+        HttpResponseEditor ollamaResponseEditor = extension.burpApi.userInterface().createHttpResponseEditor();
+
+        add(ollamaRequestEditor.uiComponent());
+        add(ollamaResponseEditor.uiComponent());
+
 
 
     }

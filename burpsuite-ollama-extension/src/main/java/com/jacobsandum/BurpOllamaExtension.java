@@ -31,7 +31,11 @@ public class BurpOllamaExtension implements BurpExtension {
 
         // Connect to other components
         BurpOllamaSettingsTab burpOllamaSettingsTab = new BurpOllamaSettingsTab(this);
-        api.userInterface().registerSuiteTab("Burp Ollama Settings", burpOllamaSettingsTab);
+        api.userInterface().registerSuiteTab("Ollama Settings", burpOllamaSettingsTab);
+
+        // Connect to other components
+        BurpOllamaRequestResponseAnalysisTab burpOllamaRequestResponseAnalysisTab = new BurpOllamaRequestResponseAnalysisTab(this);
+        api.userInterface().registerSuiteTab("Ollama", burpOllamaRequestResponseAnalysisTab);
 
         // Setup Ollama API
         this.ollamaSecurityAPI = new OllamaSecurityAPI(new OllamaAPI());
