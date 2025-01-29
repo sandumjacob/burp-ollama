@@ -1,2 +1,3 @@
 # burp-ollama
-Integrate Burpsuite with Ollama
+Integrate Burpsuite with Ollama using Montoya API.
+
