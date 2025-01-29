@@ -17,24 +17,31 @@ public class BurpOllamaRequestResponseAnalysisTab extends JComponent
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-
-        JButton ollamaAnalyzeButton = new JButton("Analyze");
-        ollamaAnalyzeButton.addActionListener(e -> {
-
-        });
-        add(ollamaAnalyzeButton);
-
-        JTextPane ollamaOutputPane = new JTextPane();
-        ollamaOutputPane.setText("Ollama output here!");
-        add(ollamaOutputPane);
-
-
         // Editor Controls UI
         JPanel editorControls = new JPanel();
 
         HttpRequestEditor ollamaRequestEditor  = extension.burpApi.userInterface().createHttpRequestEditor();
 
         HttpResponseEditor ollamaResponseEditor = extension.burpApi.userInterface().createHttpResponseEditor();
+
+        JTextPane ollamaOutputPane = new JTextPane();
+        ollamaOutputPane.setText("Ollama output here!");
+
+        JPanel ollamaControlPanel = new JPanel();
+
+        JTextField ollamaQueryField = new JTextField(32);
+        ollamaControlPanel.add(ollamaQueryField);
+
+        JButton ollamaAnalyzeButton = new JButton("Analyze");
+        ollamaAnalyzeButton.addActionListener(e -> {
+            ollamaOutputPane.setText(this.extension.ollamaSecurityAPI.analyze(ollamaRequestEditor.getRequest(), ollamaResponseEditor.getResponse()));
+        });
+        ollamaControlPanel.add(ollamaAnalyzeButton);
+
+        add(ollamaControlPanel);
+
+        add(ollamaOutputPane);
+
 
         add(ollamaRequestEditor.uiComponent());
         add(ollamaResponseEditor.uiComponent());
